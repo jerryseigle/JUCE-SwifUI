@@ -52,11 +52,11 @@ The integration allows **SwiftUI** to control the application's UI and lifecycle
                .padding()
        }
    }
-
+```
 6. Create the Main Application File (YourAppNameApp.swift)
 
 Create a new Swift file called YourAppNameApp.swift. The content should look like this:
-
+```
 import SwiftUI
 
 @main
@@ -67,6 +67,7 @@ struct YourAppNameApp: App {
         }
     }
 }
+```
 
 7. Fix the Dual Entry Point Issue
 
@@ -78,7 +79,7 @@ START_JUCE_APPLICATION (YourAppNameJUCApplication)
 
 
 The updated Main.cpp should now look like this:
-
+```
 /*
   ==============================================================================
 
@@ -150,7 +151,7 @@ private:
 
 // Remove this line to fix dual entry point issue
 // START_JUCE_APPLICATION (YourAppNameJUCApplication)
-
+```
 8. Clean and Build Again
 
 After making all these changes, clean and rebuild the project to ensure everything compiles properly.
