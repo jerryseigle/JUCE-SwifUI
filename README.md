@@ -26,45 +26,51 @@ The integration allows **SwiftUI** to control the application's UI and lifecycle
    ```swift
    import SwiftUI
 
-   // Call JUCE initialization from SwiftUI when ContentView appears
-   struct ContentView: View {
-       var body: some View {
-           Text("Hello, JUCE + SwiftUI!")
-               .padding()
-               .onAppear {
-                   // Call JUCE initialization function here
-                   initializeJUCE()
-               }
-       }
+struct ContentView: View {
+    var body: some View {
+        Text("Hello, JUCE + SwiftUI!")
+            .padding()
+            .onAppear {
+                print("ContentView has appeared. JUCE is already initialized!")
+            }
+    }
+}
 
-       private func initializeJUCE() {
-           // Call any JUCE-related logic
-           print("JUCE is initialized!")
-           // Example: Initialize JUCE components, e.g., AudioDeviceManager
-       }
-   }
+// Preview setup for SwiftUI
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        ContentView()
+            .previewLayout(.sizeThatFits)  // Optional: Makes the preview fit the content
+            .padding()
+    }
+}
 
-   // Preview setup for SwiftUI
-   struct ContentView_Previews: PreviewProvider {
-       static var previews: some View {
-           ContentView()
-               .previewLayout(.sizeThatFits)  // Optional: Makes the preview fit the content
-               .padding()
-       }
-   }
 ```
 6. Create the Main Application File (YourAppNameApp.swift)
 
 Create a new Swift file called YourAppNameApp.swift. The content should look like this:
-```
+
+```swift
 import SwiftUI
 
 @main
-struct YourAppNameApp: App {
+struct grandappApp: App {
+    init() {
+        // Initialize JUCE immediately when the app starts
+        initializeJUCE()
+        print("We just started JUCE from SwiftUI!")
+    }
+
     var body: some Scene {
         WindowGroup {
             ContentView()
         }
+    }
+
+    // JUCE initialization logic
+    private func initializeJUCE() {
+        // You can call any JUCE-related initialization logic here
+        print("JUCE is initialized!")
     }
 }
 ```
@@ -79,7 +85,7 @@ START_JUCE_APPLICATION (YourAppNameJUCApplication)
 
 
 The updated Main.cpp should now look like this:
-```
+```cpp
 /*
   ==============================================================================
 
